@@ -1,0 +1,19 @@
+version: 2.1
+orbs:
+  python: circleci/python@0.2.1
+jobs:
+  build-env:
+    executor: python/default
+    steps:
+      - checkout
+  run-recorded-tests:
+    executor: python/default
+    steps:
+     - run:
+          command: curl -X POST "https://api.testproject.io/v2/projects/sJHNunI_f0Kv51ok32AxSQ/jobs/D5GiNnmxoEOroLFI1uUsmA/run" -H "accept:application/json" -H "Authorization:vYp9JRIe-TFYo1yCWN5aG2RSHWwcjlRlACtTjDAy_xY1" -H "Content-Type:application/json" -d "{}"
+          name: Run Test On Build
+workflows:
+  main:
+    jobs:
+      - build-env
+      - run-recorded-tests
